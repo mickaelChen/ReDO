@@ -2125,6 +2125,7 @@ while opt.iteration <= opt.nIteration:
         except:
             print("Cannot save checkpoint")
         if opt.bestValIoU < sumScoreIoU_val / nbIterVal:
+            opt.bestValIoU = sumScoreIoU_val / nbIterVal
             try:
                 torch.save(stateDic, os.path.join(opt.outf, 'best.pth'))
             except:
