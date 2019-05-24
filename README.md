@@ -5,9 +5,13 @@ Code for paper Unsupervised Object Segmentation by Redrawing (arXiv incoming)
 ![redo](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo.png)
 
 ## Datasets
+
 Flowers: http://www.robots.ox.ac.uk/~vgg/data/flowers/102/
+
 CUB-200: http://www.vision.caltech.edu/visipedia/CUB-200.html
+
 LFW-funneled: http://vis-www.cs.umass.edu/lfw/
+
 segmentations for LFW-funneled : http://vis-www.cs.umass.edu/lfw/part_labels/
 
 
