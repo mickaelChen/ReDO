@@ -27,10 +27,15 @@ python redo.py --nfX 32 --useSelfAttG --useSelfAttD --outf path_output --dataroo
 
 ## Random samples (from paper)
 Those are not cherry-picked.
+
 Column 1: Input
+
 Column 2: Ground Truth
+
 Column 3: output mask for object 1
+
 Columns 4-7: generated image with redrawn object 1
+
 Columns 8-11: generated image with redrawn object 2
 
 ![flowers](https://github.com/mickaelChen/ReDO/blob/master/imgs/flowers.png)
