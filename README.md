@@ -15,6 +15,7 @@ python redo.py --nfX 32 --useSelfAttG --useSelfAttD --outf path_output --dataroo
 ```
 
 ## Random samples (from paper)
+Those are not cherry-picked
 
 ![flowers](https://github.com/mickaelChen/ReDO/blob/master/imgs/flowers.png)
 ![lfw](https://github.com/mickaelChen/ReDO/blob/master/imgs/lfw.png)
