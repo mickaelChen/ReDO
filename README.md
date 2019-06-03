@@ -1,6 +1,7 @@
 # ReDO
 
-Code for paper Unsupervised Object Segmentation by Redrawing (arXiv incoming)
+Code for paper [Unsupervised Object Segmentation by Redrawing](https://arxiv.org/abs/1905.13539).
+
 
 ![redo](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo.png)
 
