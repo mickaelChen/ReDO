@@ -21,7 +21,7 @@ Code for paper [Unsupervised Object Segmentation by Redrawing](https://arxiv.org
 1. Download and extract the *funneled images* from http://vis-www.cs.umass.edu/lfw/
 2. Download and extract the *ground truth images* from http://vis-www.cs.umass.edu/lfw/part_labels/
 3. Place the obtained *lfw_funneled* and *parts_lfw_funneled_gt_images* folders in the same folder.
-4. Also place the *train.txt*, *val.txt* and *test.txt* files from this repo in this folder.
+4. Also place the *train.txt*, *val.txt* and *test.txt* files from the repo in this folder.
 
 
 ## Example usage
