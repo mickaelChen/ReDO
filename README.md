@@ -7,23 +7,29 @@ Code for paper [Unsupervised Object Segmentation by Redrawing](https://arxiv.org
 
 ## Datasets
 
-Flowers: http://www.robots.ox.ac.uk/~vgg/data/flowers/102/
+### Flowers:
+1. Download and extract: Dataset, Segmentations, and data splits from http://www.robots.ox.ac.uk/~vgg/data/flowers/102/ 
+2. The obtained jpg folder, segmin folder and setid.mat should be placed in the same root folder.
 
-CUB-200: http://www.vision.caltech.edu/visipedia/CUB-200.html
+### CUB:
+1. Download and extract Images and Segmentations from http://www.vision.caltech.edu/visipedia/CUB-200-2011.html 
+2. Place the segmentations folder in the CUB_200_2011 folder.
+3. Place the train_val_test_split.txt file from this repo in the CUB_200_2011 folder.
+4. dataroot should be the CUB_200_2011 folder.
 
-LFW-funneled: http://vis-www.cs.umass.edu/lfw/
-
-segmentations for LFW-funneled : http://vis-www.cs.umass.edu/lfw/part_labels/
+### LFW:
+1. Download and extract the funneled images from http://vis-www.cs.umass.edu/lfw/
+2. Download and extract the ground truth images from http://vis-www.cs.umass.edu/lfw/part_labels/
+3. Place the obtained lfw_funneled and parts_lfw_funneled_gt_images folders in the same root folder.
+4. Place the train.txt, val.txt and test.txt files in the root folder.
 
 
 ## Example usage
 
 Tested on python3.7 with pytorch 1.0.1
 
-datasplits files are to be put directly in the dataset folder
-
 ```
-python redo.py --nfX 32 --useSelfAttG --useSelfAttD --outf path_output --dataroot path_to_data
+python redo.py --dataset flowers --nfX 32 --useSelfAttG --useSelfAttD --outf path_output --dataroot path_to_data
 ```
 
 ## Random samples (from paper)
