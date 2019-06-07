@@ -9,7 +9,7 @@ Code for paper [Unsupervised Object Segmentation by Redrawing](https://arxiv.org
 
 ### Flowers:
 1. Download and extract: *Dataset*, *Segmentations*, and *data splits* from http://www.robots.ox.ac.uk/~vgg/data/flowers/102/ 
-2. The obtained *jpg* folder, *segmin* folder and *setid.mat* file should be placed in the same folder.
+2. The obtained *jpg* folder, *segmin* folder and *setid.mat* file should be placed in the same data root folder.
 
 ### CUB:
 1. Download and extract *Images* and *Segmentations* from http://www.vision.caltech.edu/visipedia/CUB-200-2011.html 
@@ -20,8 +20,8 @@ Code for paper [Unsupervised Object Segmentation by Redrawing](https://arxiv.org
 ### LFW:
 1. Download and extract the *funneled images* from http://vis-www.cs.umass.edu/lfw/
 2. Download and extract the *ground truth images* from http://vis-www.cs.umass.edu/lfw/part_labels/
-3. Place the obtained *lfw_funneled* and *parts_lfw_funneled_gt_images* folders in the same folder.
-4. Also place the *train.txt*, *val.txt* and *test.txt* files from the repo in this folder.
+3. Place the obtained *lfw_funneled* and *parts_lfw_funneled_gt_images* folders in the same data root folder.
+4. Also place the *train.txt*, *val.txt* and *test.txt* files from the repo in this data root folder.
 
 
 ## Example usage
