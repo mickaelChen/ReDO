@@ -29,7 +29,7 @@ Code for paper [Unsupervised Object Segmentation by Redrawing](https://arxiv.org
 Tested on python3.7 with pytorch 1.0.1
 
 ```
-python redo.py --dataset flowers --nfX 32 --useSelfAttG --useSelfAttD --outf path_output --dataroot path_to_data
+python redo.py --dataset flowers --nfX 32 --useSelfAttG --useSelfAttD --outf path_to_output_folder --dataroot path_to_data_folder
 ```
 
 ## Random samples (from paper)
