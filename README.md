@@ -35,8 +35,7 @@ python train.py --dataset flowers --nfX 32 --useSelfAttG --useSelfAttD --outf pa
 ```
 
 ### Load pretrained models
-Pretrained weights are currently available for datasets Flowers and LFW.
-Download pretrained weights from [google drive](https://drive.google.com/drive/folders/1hUb2iOTJAbWw1NotWGAsEt4ASomhOwbh) and extract them.
+Weights pretrained on Flowers and LFW datasets can be downloaded from [google drive](https://drive.google.com/drive/folders/1hUb2iOTJAbWw1NotWGAsEt4ASomhOwbh).
 
 - *dataset_nets_state.tar.gz*: pretrained weights for all 4 networks used during training in a single file.
 
@@ -47,6 +46,7 @@ The weights for the individual networks are also available, for instance if you 
 - *dataset_netD_state.tar.gz*: pretrained weights for discriminator.
 - *dataset_netZ_state.tar.gz*: pretrained weights for the network that infer the latent code z from image.
 
+Files have to be uncompressed first to recover the *.pth* containing the weights.
 
 Provided example script use at least netM and netX and are used as follows:
 
@@ -66,11 +66,11 @@ Those are not cherry-picked.
 
 Columns:
 
-- 1) input
-- 2) ground truth
-- 3) output mask for object 1
-- 4-7) generated image with redrawn object 1
-- 8-11) generated image with redrawn object 2
+- 1: input
+- 2: ground truth
+- 3: output mask for object 1
+- 4-7: generated image with redrawn object 1
+- 8-11: generated image with redrawn object 2
 
 ![flowers](https://github.com/mickaelChen/ReDO/blob/master/imgs/flowers.png)
 ![lfw](https://github.com/mickaelChen/ReDO/blob/master/imgs/lfw.png)
