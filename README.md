@@ -46,17 +46,17 @@ The weights for the individual networks are also available, for instance if you 
 - *dataset_netD_state.tar.gz*: pretrained weights for discriminator.
 - *dataset_netZ_state.tar.gz*: pretrained weights for the network that infer the latent code z from image.
 
-Files have to be uncompressed first to recover the *.pth* containing the weights.
+*tar.gz* Archives have to be uncompressed first to recover the *.pth* files containing the weights.
 
 Provided example script use at least netM and netX and are used as follows:
 
-If using *dataset_nets_state.tar.gz* on GPU cuda device 0
+If using *dataset_nets_state.pth* on GPU cuda device 0
 
 ```
 python example_load_pretrained.py --statePath path_to_nets_state.pth --dataroot path_to_data --device cuda:0
 ```
 
-If using *dataset_netX_state.tar.gz* and *dataset_netM_state.tar.gz* on cpu:
+If using *dataset_netX_state.pth* and *dataset_netM_state.pth* on cpu:
 ```
 python example_load_pretrained.py --statePathX path_to_netX_state.pth --statePathM path_to_netM_state.pth --dataroot path_to_data --device cpu
 ```
