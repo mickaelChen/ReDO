@@ -35,7 +35,7 @@ python train.py --dataset flowers --nfX 32 --useSelfAttG --useSelfAttD --outf pa
 ```
 
 ### Load pretrained models
-Weights pretrained on Flowers and LFW datasets can be downloaded from [google drive](https://drive.google.com/drive/folders/1hUb2iOTJAbWw1NotWGAsEt4ASomhOwbh).
+Weights pretrained on Flowers, LFW, and CUB datasets can be downloaded from [google drive](https://drive.google.com/drive/folders/1hUb2iOTJAbWw1NotWGAsEt4ASomhOwbh).
 
 - *dataset_nets_state.tar.gz*: pretrained weights for all 4 networks used during training in a single file.
 
