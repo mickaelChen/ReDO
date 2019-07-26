@@ -56,7 +56,7 @@ class FlowersDataset(torch.utils.data.Dataset):
         seg = np.array(Image.open(os.path.join(self.datapath, "segmim", segname)))
         seg = 1 - ((seg[:,:,0:1] == 0) + (seg[:,:,1:2] == 0) + (seg[:,:,2:3] == 254))
         seg = (seg * 255).astype('uint8').repeat(3,axis=2)
-        seg = self.transform(Image.fromarray(seg))
+        seg = self.transform(Image.fromarray(seg))[:1]
         return img * 2 - 1, seg
 
 class LFWDataset(torch.utils.data.Dataset):
