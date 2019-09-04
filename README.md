@@ -2,10 +2,22 @@
 
 Code for paper [Unsupervised Object Segmentation by Redrawing](https://arxiv.org/abs/1905.13539), will be presented as poster at NeurIPS 2019, Vancouver.
 
-
 ![redo](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo.png)
 
-## Datasets
+## Table of Contents
+
+- [Datasets instructions](#datasets-instructions)
+  * Flowers
+  * CUB
+  * LFW
+- [Usage](#usage)
+  * Training ReDO
+  * Pretrained models
+- [Random samples](#random-samples)
+  * Samples for Flowers, LFW, CUB and our toy dataset
+  * A more diverse dataset with two classes
+
+## Datasets instructions
 
 ### Flowers:
 1. Download and extract: *Dataset*, *Segmentations*, and *data splits* from http://www.robots.ox.ac.uk/~vgg/data/flowers/102/ 
@@ -24,7 +36,7 @@ Code for paper [Unsupervised Object Segmentation by Redrawing](https://arxiv.org
 4. Also place the *train.txt*, *val.txt* and *test.txt* files from the repo in this data root folder.
 
 
-## Example usage
+## Usage
 
 Tested on python3.7 with pytorch 1.0.1
 
@@ -61,13 +73,13 @@ If using *dataset_netX_state.pth* and *dataset_netM_state.pth* on cpu:
 python example_load_pretrained.py --statePathX path_to_netX_state.pth --statePathM path_to_netM_state.pth --dataroot path_to_data --device cpu
 ```
 
-## Random samples (from paper)
+## Random samples
 
 ### Samples for Flowers, LFW, CUB and our toy dataset
 Those are not cherry-picked.
 ![samples](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo_samples.jpeg)
 
-### A more diverse dataset
+### A more diverse dataset with two classes
 
 During the rebuttal process, we were asked to demonstrate that ReDO can work when the dataset contains multiple classes.
 We build a new dataset by combining LFW and Flowers images (without labels). This new dataset has more variability,
