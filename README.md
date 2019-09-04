@@ -69,7 +69,7 @@ Those are not cherry-picked.
 
 ### A more diverse dataset
 
-During the rebuttal process, we were asked to demonstrate that ReDO can work when the dataset have multiple classes.
+During the rebuttal process, we were asked to demonstrate that ReDO can work when the dataset contains multiple classes.
 We build a new dataset by combining LFW and Flowers images (without labels). This new dataset has more variability,
 contains different types of objects, and display a more obvious correlation between the object and the background. 
 We trained ReDO without further hyperparameter tuning (not optimal), and obtained a reasonable accuracy of 0.856 and IoU of 0.691.
