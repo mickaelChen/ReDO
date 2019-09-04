@@ -72,5 +72,5 @@ Columns:
 - 4-7: generated image with redrawn object 1
 - 8-11: generated image with redrawn object 2
 
-![samples](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo_samples.png)
+![samples](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo_samples.jpeg)
 ![lfw + flowers](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo_lfwxflowers.png)
