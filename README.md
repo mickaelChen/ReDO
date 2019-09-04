@@ -6,6 +6,9 @@ Code for paper [Unsupervised Object Segmentation by Redrawing](https://arxiv.org
 
 ## Table of Contents
 
+- [Random samples](#random-samples)
+  * Samples for Flowers, LFW, CUB and our toy dataset
+  * A more diverse dataset with two classes
 - [Datasets instructions](#datasets-instructions)
   * Flowers
   * CUB
@@ -13,9 +16,20 @@ Code for paper [Unsupervised Object Segmentation by Redrawing](https://arxiv.org
 - [Usage](#usage)
   * Training ReDO
   * Pretrained models
-- [Random samples](#random-samples)
-  * Samples for Flowers, LFW, CUB and our toy dataset
-  * A more diverse dataset with two classes
+
+## Random samples
+
+### Samples for Flowers, LFW, CUB and our toy dataset
+Those are not cherry-picked.
+![samples](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo_samples.jpeg)
+
+### A more diverse dataset with two classes
+
+During the rebuttal process, we were asked to demonstrate that ReDO can work when the dataset contains multiple classes.
+We build a new dataset by combining LFW and Flowers images (without labels). This new dataset has more variability,
+contains different types of objects, and display a more obvious correlation between the object and the background. 
+We trained ReDO without further hyperparameter tuning (not optimal), and obtained a reasonable accuracy of 0.856 and IoU of 0.691.
+![lfw + flowers](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo_lfwxflowers.png)
 
 ## Datasets instructions
 
@@ -72,17 +86,3 @@ If using *dataset_netX_state.pth* and *dataset_netM_state.pth* on cpu:
 ```
 python example_load_pretrained.py --statePathX path_to_netX_state.pth --statePathM path_to_netM_state.pth --dataroot path_to_data --device cpu
 ```
-
-## Random samples
-
-### Samples for Flowers, LFW, CUB and our toy dataset
-Those are not cherry-picked.
-![samples](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo_samples.jpeg)
-
-### A more diverse dataset with two classes
-
-During the rebuttal process, we were asked to demonstrate that ReDO can work when the dataset contains multiple classes.
-We build a new dataset by combining LFW and Flowers images (without labels). This new dataset has more variability,
-contains different types of objects, and display a more obvious correlation between the object and the background. 
-We trained ReDO without further hyperparameter tuning (not optimal), and obtained a reasonable accuracy of 0.856 and IoU of 0.691.
-![lfw + flowers](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo_lfwxflowers.png)
