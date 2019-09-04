@@ -65,6 +65,8 @@ python example_load_pretrained.py --statePathX path_to_netX_state.pth --statePat
 Those are not cherry-picked.
 ![samples](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo_samples.jpeg)
 
+### a more diverse dataset
+
 During the rebuttal process, we were asked to demonstrate that ReDO can work when the dataset have multiple classes.
 We build a new dataset by combining LFW and Flowers images (without labels). This new dataset has more variability,
 contains different types of objects, and display a more obvious correlation between the object and the background. 
