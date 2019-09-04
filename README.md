@@ -1,6 +1,6 @@
 # ReDO
 
-Code for paper [Unsupervised Object Segmentation by Redrawing](https://arxiv.org/abs/1905.13539).
+Code for paper [Unsupervised Object Segmentation by Redrawing](https://arxiv.org/abs/1905.13539), presented at NeurIPS 2019, Vancouver.
 
 
 ![redo](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo.png)
