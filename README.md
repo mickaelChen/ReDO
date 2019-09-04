@@ -63,14 +63,10 @@ python example_load_pretrained.py --statePathX path_to_netX_state.pth --statePat
 
 ## Random samples (from paper)
 Those are not cherry-picked.
-
-Columns:
-
-- 1: input
-- 2: ground truth
-- 3: output mask for object 1
-- 4-7: generated image with redrawn object 1
-- 8-11: generated image with redrawn object 2
-
 ![samples](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo_samples.jpeg)
+
+During the rebuttal process, we were asked to demonstrate that ReDO can work when the dataset have multiple classes.
+We build a new dataset by combining LFW and Flowers images (without labels). This new dataset has more variability,
+contains different types of objects, and display a more obvious correlation between the object and the background. 
+We trained ReDO without further hyperparameter tuning (not optimal), and obtained a reasonable accuracy of 0.856 and IoU of 0.691.
 ![lfw + flowers](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo_lfwxflowers.png)
