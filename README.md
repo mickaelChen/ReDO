@@ -7,7 +7,7 @@ Code for paper [Unsupervised Object Segmentation by Redrawing](https://arxiv.org
 ## Table of Contents
 
 - [Random samples](#random-samples)
-  * Samples for Flowers, LFW, CUB and our toy dataset
+  * Samples for Flowers, LFW, CUB and toy dataset
   * A more diverse dataset with two classes
 - [Datasets instructions](#datasets-instructions)
   * Flowers
@@ -19,7 +19,7 @@ Code for paper [Unsupervised Object Segmentation by Redrawing](https://arxiv.org
 
 ## Random samples
 
-### Samples for Flowers, LFW, CUB and our toy dataset
+### Samples for Flowers, LFW, CUB and toy dataset
 ![samples](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo_samples.png)
 
 ### A more diverse dataset with two classes
