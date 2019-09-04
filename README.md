@@ -21,7 +21,7 @@ Code for paper [Unsupervised Object Segmentation by Redrawing](https://arxiv.org
 
 ### Samples for Flowers, LFW, CUB and our toy dataset
 Those are not cherry-picked.
-![samples](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo_samples.jpeg)
+![samples](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo_samples.png)
 
 ### A more diverse dataset with two classes
 
