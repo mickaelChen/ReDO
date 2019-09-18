@@ -389,7 +389,7 @@ while opt.iteration <= opt.nIteration:
         if opt.wrecZ > 0:
             netRecZ.zero_grad()
             stateDic['netRecZ'] = netRecZ.state_dict()
-            stateDic['optimizerRecZ'] = optimizerRecZ.state_dict(),
+            stateDic['optimizerRecZ'] = optimizerRecZ.state_dict()
         try:
             torch.save(stateDic, os.path.join(opt.outf, 'state_%05d.pth' % opt.iteration))
             torch.save(opt, os.path.join(opt.outf, "options.pth"))
