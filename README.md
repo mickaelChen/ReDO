@@ -71,7 +71,7 @@ The weights for the individual networks are also available, for instance if you 
 - *dataset_netD_state.tar.gz*: pretrained weights for discriminator.
 - *dataset_netZ_state.tar.gz*: pretrained weights for the network that infer the latent code z from image.
 
-*tar.gz* Archives have to be uncompressed first to recover the *.pth* files containing the weights.
+*.tar.gz* archives have to be uncompressed first to recover the *.pth* files containing the weights.
 
 Provided example script use at least netM and netX and are used as follows:
 
