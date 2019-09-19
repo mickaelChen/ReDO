@@ -73,7 +73,7 @@ The weights for the individual networks are also available, for instance if you 
 
 *.tar.gz* archives have to be uncompressed first to recover the *.pth* files containing the weights.
 
-Provided example script use at least netM and netX and are used as follows:
+Provided example script needs at least netM and netX and is used as follows:
 
 If using *dataset_nets_state.pth* on GPU cuda device 0
 
