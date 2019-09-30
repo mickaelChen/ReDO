@@ -4,6 +4,8 @@ Code for paper [Unsupervised Object Segmentation by Redrawing](https://arxiv.org
 
 ![redo](https://github.com/mickaelChen/ReDO/blob/master/imgs/redo.png)
 
+We discover meaningful segmentation masks by redrawing regions of the images independently.
+
 ## Table of Contents
 
 - [Random samples](#random-samples)
