@@ -87,3 +87,9 @@ If using *dataset_netX_state.pth* and *dataset_netM_state.pth* on cpu:
 ```
 python example_load_pretrained.py --statePathX path_to_netX_state.pth --statePathM path_to_netM_state.pth --dataroot path_to_data --device cpu
 ```
+
+### Comments
+
+This implementation diverged somewhat from the original one used in the paper in the sense that instead of sampling a region at each iteration, fake images for all regions are computed at each iteration.
+We take advantage of that by building an entirely generated image we can feed to the information conservation network instead of partially redrawn images.
+This doesn't change any of the principle behind of ReDO.
