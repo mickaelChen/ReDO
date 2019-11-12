@@ -37,18 +37,18 @@ parser.add_argument('--sizex', type=int, default=128, help='size of the input im
 parser.add_argument('--nz', type=int, default=32, help='size of the latent z vector')
 parser.add_argument('--nMasks', type=int, default=2, help='number of masks')
 parser.add_argument('--nResM', type=int, default=3, help='number of residual blocs in netM')
-parser.add_argument('--nf', type=int, default=64)
-parser.add_argument('--nfD', type=int, default=None)
-parser.add_argument('--nfX', type=int, default=None)
-parser.add_argument('--nfM', type=int, default=None)
-parser.add_argument('--nfZ', type=int, default=None)
+parser.add_argument('--nf', type=int, default=64, help='base number of filters for conv nets')
+parser.add_argument('--nfD', type=int, default=None, help='specific nf for netD, default to nf')
+parser.add_argument('--nfX', type=int, default=None, help='specific nf for netX, default to nf')
+parser.add_argument('--nfM', type=int, default=None, help='specific nf for netM, default to nf')
+parser.add_argument('--nfZ', type=int, default=None, help='specific nf for netZ, default to nf')
 parser.add_argument('--useSelfAttD', action='store_true', help='use self attention for D')
 parser.add_argument('--useSelfAttG', action='store_true', help='use self attention for G')
 parser.add_argument('--workers', type=int, help='number of data loading workers', default=4)
 parser.add_argument('--batchSize', type=int, default=20, help='input batch size')
 parser.add_argument('--nTest', type=int, default=5, help='input batch size for visu')
 parser.add_argument('--nIteration', type=int, default=5e4, help='number of iterations')
-parser.add_argument('--initOrthoGain', type=float, default=.8)
+parser.add_argument('--initOrthoGain', type=float, default=.8, help='gain for the initialization')
 parser.add_argument('--lrG', type=float, default=1e-4, help='learning rate for G, default=1e-4')
 parser.add_argument('--lrM', type=float, default=1e-5, help='learning rate for M, default=1e-5')
 parser.add_argument('--lrD', type=float, default=1e-4, help='learning rate for D, default=1e-4')
@@ -65,6 +65,7 @@ parser.add_argument('--manualSeed', type=int, help='manual seed')
 parser.add_argument('--resume', action='store_true', help='resume from last save')
 parser.add_argument('--clean', action='store_true', help='clean previous states')
 parser.add_argument('--silent', action='store_true', help='silent execution')
+parser.add_argument('--autoRestart', type=float, default=0, help='restart training if the ratio "size of region" / "size of image" is stricly smaller than x (collapse detected)')
 
 opt = parser.parse_args()
 
@@ -180,7 +181,7 @@ trainloader = torch.utils.data.DataLoader(trainset, batch_size=opt.batchSize, sh
 def weights_init_ortho(m):
     if isinstance(m, nn.Conv2d) or isinstance(m, nn.ConvTranspose2d) or isinstance(m, nn.Linear):
         nn.init.orthogonal_(m.weight, opt.initOrthoGain)
-        
+
 netEncM = models._netEncM(sizex=opt.sizex, nIn=opt.nx, nMasks=opt.nMasks, nRes=opt.nResM, nf=opt.nfM, temperature=opt.temperature).to(device)
 netGenX = models._netGenX(sizex=opt.sizex, nOut=opt.nx, nc=opt.nz, nf=opt.nfX, nMasks=opt.nMasks, selfAtt=opt.useSelfAttG).to(device)
 netDX = models._resDiscriminator128(nIn=opt.nx, nf=opt.nfD, selfAtt=opt.useSelfAttD).to(device)
@@ -250,7 +251,8 @@ def evaluate(netEncM, loader, device, nMasks=2):
             ((((mPred[:,:1] <  .5).float() + mData) == 2).float().sum(-1).sum(-1) /
              (((mPred[:,:1] <  .5).float() + mData) >= 1).float().sum(-1).sum(-1))).mean().item()
         nbIter += 1
-    return sumScoreAcc / nbIter, sumScoreIoU / nbIter
+    minRegionSize = min((mPred[:,:1] >= .5).float().mean().item(), (mPred[:,:1] < .5).float().mean().item())
+    return sumScoreAcc / nbIter, sumScoreIoU / nbIter, minRegionSize
 
 x_test, m_test = next(iter(torch.utils.data.DataLoader(testset, batch_size=opt.nTest, shuffle=True, num_workers=4, drop_last=True)))
 
@@ -355,8 +357,8 @@ while opt.iteration <= opt.nIteration:
                     zx_test = z_test.clone()
                     zx_test[:, k] = zn_test[i]
                     out_X[k, 1:, i+5] = netGenX(mEnc_test, zx_test)[:,k] + ((1 - mEnc_test[:,k:k+1]) * x_test)
-            scoreAccTrain, scoreIoUTrain = evaluate(netEncM, trainloader, device, opt.nMasks)
-            scoreAccVal, scoreIoUVal = evaluate(netEncM, valloader, device, opt.nMasks)
+            scoreAccTrain, scoreIoUTrain, minRegionSizeTrain = evaluate(netEncM, trainloader, device, opt.nMasks)
+            scoreAccVal, scoreIoUVal, minRegionSizeVal = evaluate(netEncM, valloader, device, opt.nMasks)
             if not opt.silent:
                 print("train:", scoreAccTrain, scoreIoUTrain)
                 print("val:", scoreAccVal, scoreIoUVal)
@@ -377,6 +379,26 @@ while opt.iteration <= opt.nIteration:
         netEncM.zero_grad()
         netGenX.zero_grad()
         netDX.zero_grad()
+        if opt.wrecZ > 0:
+            netRecZ.zero_grad()
+        if minRegionSizeTrain < opt.autoRestart and minRegionSizeVal < opt.autoRestart:
+            print("Training appear to have collapsed.")
+            if opt.iteration <= 7000:
+                print("Reinitializing training.")
+                netEncM.apply(weights_init_ortho)
+                netGenX.apply(weights_init_ortho)
+                netDX.apply(weights_init_ortho)
+                optimizerEncM = torch.optim.Adam(netEncM.parameters(), lr=opt.lrM, betas=(0, 0.9), weight_decay=opt.wdecay, amsgrad=False)
+                optimizerGenX = torch.optim.Adam(netGenX.parameters(), lr=opt.lrG, betas=(0, 0.9), amsgrad=False)
+                optimizerDX = torch.optim.Adam(netDX.parameters(), lr=opt.lrD, betas=(0, 0.9), amsgrad=False)
+                if opt.wrecZ > 0:
+                    netRecZ.apply(weights_init_ortho)
+                    optimizerRecZ = torch.optim.Adam(netRecZ.parameters(), lr=opt.lrZ, betas=(0, 0.9), amsgrad=False)
+                if not opt.silent:
+                    pbar = tqdm(total=opt.checkpointFreq)
+                opt.iteration = 0
+                stateDic = {}
+                continue
         stateDic = {
             'netEncM': netEncM.state_dict(),
             'netGenX': netGenX.state_dict(),
@@ -387,7 +409,6 @@ while opt.iteration <= opt.nIteration:
             'options': opt,
         }
         if opt.wrecZ > 0:
-            netRecZ.zero_grad()
             stateDic['netRecZ'] = netRecZ.state_dict()
             stateDic['optimizerRecZ'] = optimizerRecZ.state_dict()
         try:
