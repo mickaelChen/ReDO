@@ -16,8 +16,8 @@ We discover meaningful segmentation masks by redrawing regions of the images ind
   * CUB
   * LFW
 - [Usage](#usage)
-  * Training ReDO
   * Pretrained models
+  * Training ReDO
 
 ## Random samples
 
@@ -55,12 +55,6 @@ We trained ReDO without further hyperparameter tuning (not optimal), and obtaine
 
 Tested on python3.7 with pytorch 1.0.1
 
-### Training from scratch
-
-```
-python train.py --dataset flowers --nfX 32 --useSelfAttG --useSelfAttD --outf path_to_output_folder --dataroot path_to_data_folder
-```
-
 ### Load pretrained models
 Weights pretrained on Flowers, LFW, and CUB datasets can be downloaded from [google drive](https://drive.google.com/drive/folders/1hUb2iOTJAbWw1NotWGAsEt4ASomhOwbh).
 
@@ -87,3 +81,23 @@ If using *dataset_netX_state.pth* and *dataset_netM_state.pth* on cpu:
 ```
 python example_load_pretrained.py --statePathX path_to_netX_state.pth --statePathM path_to_netM_state.pth --dataroot path_to_data --device cpu
 ```
+
+
+### Training from scratch
+
+Examples:
+
+```
+python train.py --dataset flowers --nfX 32 --useSelfAttG --useSelfAttD --outf path_to_output_folder --dataroot path_to_data_folder --clean
+
+python train.py --dataset lfw --useSelfAttG --useSelfAttD --outf path_to_output_folder --dataroot path_to_data_folder --clean
+```
+
+Some clarifications about the training process and the collapse issue:
+
+As mentionned in the paper, the model can collapse with one region taking the whole image.
+This happens early in the training (at about 3-5k iterations) in some runs (about 3.5 out of 10 in my experiments).
+In this case, it is possible to restart training automatically (using the --autoRestart .15 option)
+
+After this, the early stages, training should be stable.
+I stop training in the 20k~40k range, but the model gets unstable again if you train for too long.
