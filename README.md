@@ -89,7 +89,8 @@ Examples:
 
 ```
 python train.py --dataset flowers --nfX 32 --useSelfAttG --useSelfAttD --outf path_to_output_folder --dataroot path_to_data_folder --clean
-
+```
+```
 python train.py --dataset lfw --useSelfAttG --useSelfAttD --outf path_to_output_folder --dataroot path_to_data_folder --clean
 ```
 
