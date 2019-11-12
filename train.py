@@ -309,6 +309,10 @@ while opt.iteration <= opt.nIteration:
     dStep = (opt.iteration % opt.dStepFreq == 0)
     gStep = (opt.iteration % opt.gStepFreq == 0)
     #########################  AutoEncode X #########################
+    '''
+    Instead of sampling a region at each iteration, fake images for all regions are computed at each iteration.
+    This allow to build an entirely generated image we can feed to the information conservation network instead of partially redrawn images.
+    '''
     if gStep:
         mEnc = netEncM(xData)
         hGen = netGenX(mEnc, zData)
