@@ -182,10 +182,10 @@ def weights_init_ortho(m):
     if isinstance(m, nn.Conv2d) or isinstance(m, nn.ConvTranspose2d) or isinstance(m, nn.Linear):
         nn.init.orthogonal_(m.weight, opt.initOrthoGain)
 
+
 netEncM = models._netEncM(sizex=opt.sizex, nIn=opt.nx, nMasks=opt.nMasks, nRes=opt.nResM, nf=opt.nfM, temperature=opt.temperature).to(device)
 netGenX = models._netGenX(sizex=opt.sizex, nOut=opt.nx, nc=opt.nz, nf=opt.nfX, nMasks=opt.nMasks, selfAtt=opt.useSelfAttG).to(device)
 netDX = models._resDiscriminator128(nIn=opt.nx, nf=opt.nfD, selfAtt=opt.useSelfAttD).to(device)
-
 netEncM.apply(weights_init_ortho)
 netGenX.apply(weights_init_ortho)
 netDX.apply(weights_init_ortho)
@@ -389,6 +389,9 @@ while opt.iteration <= opt.nIteration:
             print("Training appear to have collapsed.")
             if opt.iteration <= 7000:
                 print("Reinitializing training.")
+                netEncM = models._netEncM(sizex=opt.sizex, nIn=opt.nx, nMasks=opt.nMasks, nRes=opt.nResM, nf=opt.nfM, temperature=opt.temperature).to(device)
+                netGenX = models._netGenX(sizex=opt.sizex, nOut=opt.nx, nc=opt.nz, nf=opt.nfX, nMasks=opt.nMasks, selfAtt=opt.useSelfAttG).to(device)
+                netDX = models._resDiscriminator128(nIn=opt.nx, nf=opt.nfD, selfAtt=opt.useSelfAttD).to(device)
                 netEncM.apply(weights_init_ortho)
                 netGenX.apply(weights_init_ortho)
                 netDX.apply(weights_init_ortho)
