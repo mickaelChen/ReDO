@@ -98,7 +98,7 @@ Some clarifications about the training process and the collapse issue:
 
 As mentionned in the paper, the model can collapse with one region taking the whole image.
 This happens early in the training (at about 3-5k iterations) in some runs (about 3.5 out of 10 in my experiments).
-In this case, it is possible to restart training automatically (using the --autoRestart .15 option)
+In this case, it is possible to restart training automatically using option --autoRestart .15 (or smaller for lfw).
 
 After these early stages, training should be stable.
 I stop training in the 20k~40k range, but the model gets unstable again if you train for too long.
